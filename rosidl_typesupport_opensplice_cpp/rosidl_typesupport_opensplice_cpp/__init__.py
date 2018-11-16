@@ -55,6 +55,9 @@ def generate_dds_opensplice_cpp(
         except FileExistsError:
             pass
 
+        # idlpp doesn't like long path arguments over 256 chars, get just the filename
+        filename = os.path.basename(idl_file)
+
         cmd = [idl_pp]
         for include_dir in include_dirs:
             cmd += ['-I', include_dir]
@@ -63,7 +66,7 @@ def generate_dds_opensplice_cpp(
             '-l', 'cpp',
             '-N',
             '-d', output_path,
-            idl_file
+            filename
         ]
         if os.name == 'nt':
             cmd[-1:-1] = [
@@ -71,14 +74,14 @@ def generate_dds_opensplice_cpp(
                 'ROSIDL_TYPESUPPORT_OPENSPLICE_CPP_PUBLIC_%s,%s' % (
                     pkg_name,
                     '%s/msg/rosidl_typesupport_opensplice_cpp__visibility_control.h' % pkg_name)]
-        subprocess.check_call(cmd)
+        subprocess.check_call(cmd, cwd=folder)
 
         # modify generated code to
         # remove path information of the building machine as well as timestamps
-        msg_name = os.path.splitext(os.path.basename(idl_file))[0]
+        msg_name = os.path.splitext(filename)[0]
         idl_path = os.path.join(
             pkg_name, os.path.basename(parent_folder), os.path.basename(folder),
-            os.path.basename(idl_file))
+            filename)
         h_filename = os.path.join(output_path, '%s.h' % msg_name)
         _modify(h_filename, msg_name, _replace_path_and_timestamp, idl_path=idl_path)
         cpp_filename = os.path.join(output_path, '%s.cpp' % msg_name)
@@ -153,10 +156,10 @@ def generate_typesupport_opensplice_cpp(args):
 
     for idl_file in args['ros_interface_files']:
         extension = os.path.splitext(idl_file)[1]
+        subfolder = os.path.basename(os.path.dirname(idl_file))
         if extension == '.msg':
             spec = parse_message_file(pkg_name, idl_file)
             validate_field_types(spec, known_msg_types)
-            subfolder = os.path.basename(os.path.dirname(idl_file))
             for template_file, generated_filename in mapping_msgs.items():
                 generated_file = os.path.join(args['output_dir'], subfolder)
                 if generated_filename.endswith('.cpp'):
@@ -175,14 +178,14 @@ def generate_typesupport_opensplice_cpp(args):
             spec = parse_service_file(pkg_name, idl_file)
             validate_field_types(spec, known_msg_types)
             for template_file, generated_filename in mapping_srvs.items():
-                generated_file = os.path.join(args['output_dir'], 'srv')
+                generated_file = os.path.join(args['output_dir'], subfolder)
                 if generated_filename.endswith('.cpp'):
                     generated_file = os.path.join(generated_file, 'dds_opensplice')
                 generated_file = os.path.join(
                     generated_file, generated_filename %
                     convert_camel_case_to_lower_case_underscore(spec.srv_name))
 
-                data = {'spec': spec}
+                data = {'spec': spec, 'subfolder': subfolder}
                 data.update(functions)
                 expand_template(
                     template_file, data, generated_file,
