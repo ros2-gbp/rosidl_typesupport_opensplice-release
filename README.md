@@ -1,3 +1,29 @@
+## rosidl_typesupport_opensplice (crystal) - 0.6.3-1
+
+The packages in the `rosidl_typesupport_opensplice` repository were released into the `crystal` distro by running `/usr/bin/bloom-release -e -r crystal rosidl_typesupport_opensplice --override-release-repository-push-url git@github.com:ros2-gbp/rosidl_typesupport_opensplice-release` on `Sat, 17 Aug 2019 16:41:41 -0000`
+
+These packages were released:
+- `opensplice_cmake_module`
+- `rosidl_typesupport_opensplice_c`
+- `rosidl_typesupport_opensplice_cpp`
+
+Version of package(s) in repository `rosidl_typesupport_opensplice`:
+
+- upstream repository: https://github.com/ros2/rosidl_typesupport_opensplice.git
+- release repository: https://github.com/ros2-gbp/rosidl_typesupport_opensplice-release.git
+- rosdistro version: `0.6.2-0`
+- old version: `0.7.1-1`
+- new version: `0.6.3-1`
+
+Versions of tools used:
+
+- bloom version: `0.8.0`
+- catkin_pkg version: `0.4.12`
+- rosdep version: `0.15.2`
+- rosdistro version: `0.7.4`
+- vcstools version: `0.1.40`
+
+
 ## rosidl_typesupport_opensplice (crystal) - 0.7.1-1
 
 The packages in the `rosidl_typesupport_opensplice` repository were released into the `crystal` distro by running `/usr/bin/bloom-release -r crystal rosidl_typesupport_opensplice --override-release-repository-push-url git@github.com:ros2-gbp/rosidl_typesupport_opensplice-release` on `Sat, 17 Aug 2019 16:38:48 -0000`
