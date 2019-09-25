@@ -1,3 +1,29 @@
+## rosidl_typesupport_opensplice (eloquent) - 0.8.0-1
+
+The packages in the `rosidl_typesupport_opensplice` repository were released into the `eloquent` distro by running `/usr/bin/bloom-release --track eloquent --rosdistro eloquent rosidl_typesupport_opensplice` on `Wed, 25 Sep 2019 21:29:15 -0000`
+
+These packages were released:
+- `opensplice_cmake_module`
+- `rosidl_typesupport_opensplice_c`
+- `rosidl_typesupport_opensplice_cpp`
+
+Version of package(s) in repository `rosidl_typesupport_opensplice`:
+
+- upstream repository: https://github.com/ros2/rosidl_typesupport_opensplice.git
+- release repository: unknown
+- rosdistro version: `null`
+- old version: `null`
+- new version: `0.8.0-1`
+
+Versions of tools used:
+
+- bloom version: `0.8.0`
+- catkin_pkg version: `0.4.13`
+- rosdep version: `0.16.1`
+- rosdistro version: `0.7.4`
+- vcstools version: `0.1.42`
+
+
 ## rosidl_typesupport_opensplice (dashing) - 0.7.3-1
 
 The packages in the `rosidl_typesupport_opensplice` repository were released into the `dashing` distro by running `/usr/bin/bloom-release --track dashing --rosdistro dashing rosidl_typesupport_opensplice` on `Tue, 03 Sep 2019 14:26:38 -0000`
